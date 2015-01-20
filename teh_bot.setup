@@ -1,0 +1,28 @@
+;;; teh_bot.meta
+
+(compile -s -O3 "vandusen-greeter.scm" -j vandusen-greeter)
+(compile -s -O3 "vandusen-greeter.import.scm")
+(install-extension
+  'teh_bot
+  '("vandusen-greeter.so" "vandusen-greeter.import.so")
+  '((version 1.0)))
+
+
+(compile -s -O3 "vandusen-responder.scm" -j vandusen-responder)
+(compile -s -O3 "vandusen-responder.import.scm")
+(install-extension
+  'teh_bot
+  '("vandusen-responder.so" "vandusen-responder.import.so")
+  '((version 1.0)))
+
+
+(compile -c -O3 "megahal.c")
+(compile -c -O3 "vandusen-megahal.scm" -j vandusen-megahal)
+(compile -s -O3 -o "vandusen-megahal.so" "vandusen-megahal.o" "megahal.o")
+(compile -s -O3 "vandusen-megahal.import.scm")
+(install-extension
+  'teh_bot
+  '("vandusen-megahal.so" "vandusen-megahal.import.so")
+  '((version 1.0)))
+
+

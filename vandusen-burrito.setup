@@ -1,0 +1,29 @@
+;;; teh_bot.meta
+
+(define package-files '())
+(define (add-files xs) (set! package-files (append package-files xs)))
+
+; Greeter
+(compile -s -O3 "vandusen-greeter.scm" -j vandusen-greeter)
+(compile -s -O3 "vandusen-greeter.import.scm")
+(add-files (list "vandusen-greeter.so" "vandusen-greeter.import.so"))
+
+; Responder
+(compile -s -O3 "vandusen-responder.scm" -j vandusen-responder)
+(compile -s -O3 "vandusen-responder.import.scm")
+(add-files (list "vandusen-responder.so" "vandusen-responder.import.so"))
+
+; Megahal
+(compile -c -O3 "megahal.c")
+(compile -c -O3 "vandusen-megahal.scm" -j vandusen-megahal)
+(compile -s -O3 -o "vandusen-megahal.so" "vandusen-megahal.o" "megahal.o")
+(compile -s -O3 "vandusen-megahal.import.scm")
+(add-files (list "vandusen-megahal.so" "vandusen-megahal.import.so"))
+
+; Install it all
+(install-extension
+  'vandusen-burrito
+  package-files
+  '((version 1.0)))
+
+

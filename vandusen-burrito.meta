@@ -1,0 +1,6 @@
+((synopsis "A few vandusen plugins to make it more chatty")
+ (author "Craig Andrews <craig@lazyrobot.org.uk>")
+ (category net)
+ (license "GPLv3")
+ (needs (irc "1.9.8")
+        vandusen))
