@@ -4,6 +4,8 @@
   (import chicken scheme)
   (use vandusen irc posix srfi-1 srfi-13 regex data-structures)
 
+  ($ 'responder-prefix "!")
+
   (define responders '())
 
   (define (responder key action)
@@ -22,7 +24,7 @@
             (message-handler
               (lambda (m)
                 (and-let* ((body (cadr (irc:message-parameters m)))
-                           (matches (string-match "!(\\S+)\\s*(.*)" body)))
+                           (matches (string-match (conc ($ 'responder-prefix) "(\\S+)\\s*(.*)") body)))
                           (debug (conc "Running responder " (cadr matches)))
                           (run-responder m
                                          (string->symbol (cadr matches))
