@@ -14,10 +14,10 @@
 (add-files (list "vandusen-responder.so" "vandusen-responder.import.so"))
 
 ; Megahal
-(compile -c -O3 "megahal.c")
-(compile -c -O3 "vandusen-megahal.scm" -j vandusen-megahal)
-(compile -s -O3 -o "vandusen-megahal.so" "vandusen-megahal.o" "megahal.o")
-(compile -s -O3 "vandusen-megahal.import.scm")
+(compile -c -C -g -C -fPIC "megahal.c")
+(compile -c -C -g -C -fPIC "vandusen-megahal.scm" -j vandusen-megahal)
+(compile -s -o "vandusen-megahal.so" "vandusen-megahal.o" "megahal.o")
+(compile -s "vandusen-megahal.import.scm")
 (add-files (list "vandusen-megahal.so" "vandusen-megahal.import.so"))
 
 ; Install it all
